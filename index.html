@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Research Paper Assistant</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            overflow: hidden;
+            font-family: Inter, -apple-system, BlinkMacSystemFont,
+                "Segoe UI", Arial, sans-serif;
+            background: #f6f7f9;
+            color: #17191c;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            height: 68px;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .header-inner {
+            max-width: 1180px;
+            height: 100%;
+            margin: auto;
+            padding: 0 28px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .brand-mark {
+            width: 36px;
+            height: 36px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #111827;
+            color: white;
+
+            border-radius: 8px;
+
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .brand h1 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .brand p {
+            margin: 2px 0 0;
+            font-size: 11px;
+            color: #737b87;
+        }
+
+        .status-badge {
+            padding: 6px 11px;
+
+            border: 1px solid #d7dbe1;
+            border-radius: 20px;
+
+            background: #fafafa;
+
+            color: #59616d;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+        }
+
+        /* ================= MAIN ================= */
+
+        main {
+            width: 100%;
+            max-width: 1180px;
+
+            height: calc(100vh - 108px);
+
+            margin: 0 auto;
+            padding: 25px 28px;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            flex-shrink: 0;
+            margin-bottom: 20px;
+        }
+
+        .hero h2 {
+            margin: 0 0 5px;
+
+            font-size: 27px;
+            line-height: 1.2;
+
+            font-weight: 700;
+            letter-spacing: -0.6px;
+
+            color: #111827;
+        }
+
+        .hero p {
+            margin: 0;
+
+            color: #6b7280;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        /* ================= LAYOUT ================= */
+
+        .layout {
+            flex: 1;
+            min-height: 0;
+
+            display: grid;
+            grid-template-columns: 330px minmax(0, 1fr);
+
+            gap: 20px;
+        }
+
+        /* ================= CARDS ================= */
+
+        .card {
+            min-height: 0;
+
+            background: #ffffff;
+
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+
+            box-shadow:
+                0 2px 8px rgba(0, 0, 0, 0.025);
+        }
+
+        /* ================= UPLOAD CARD ================= */
+
+        .upload-card {
+            padding: 20px;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-header {
+            flex-shrink: 0;
+
+            padding-bottom: 15px;
+
+            border-bottom: 1px solid #edf0f2;
+        }
+
+        .card-header h3 {
+            margin: 0;
+
+            font-size: 15px;
+            font-weight: 650;
+
+            color: #111827;
+        }
+
+        .card-header p {
+            margin: 5px 0 0;
+
+            color: #737b87;
+
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        /* ================= UPLOAD AREA ================= */
+
+        .upload-zone {
+            margin-top: 18px;
+
+            border: 1px dashed #c9ced6;
+            border-radius: 9px;
+
+            padding: 22px 14px;
+
+            text-align: center;
+
+            background: #fafbfc;
+
+            transition: 0.15s;
+        }
+
+        .upload-zone:hover {
+            border-color: #9ca3af;
+            background: #f8fafc;
+        }
+
+        .upload-symbol {
+            width: 42px;
+            height: 42px;
+
+            margin: 0 auto 10px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid #d9dde3;
+            border-radius: 8px;
+
+            background: #ffffff;
+
+            color: #4b5563;
+
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .upload-zone strong {
+            display: block;
+
+            font-size: 12px;
+            font-weight: 600;
+
+            color: #374151;
+        }
+
+        .upload-zone span {
+            display: block;
+
+            margin-top: 5px;
+
+            color: #8a919c;
+
+            font-size: 10px;
+        }
+
+        #files {
+            width: 100%;
+
+            margin-top: 13px;
+
+            font-size: 11px;
+        }
+
+        /* ================= BUTTON ================= */
+
+        .primary-btn {
+            width: 100%;
+
+            margin-top: 13px;
+
+            border: none;
+            border-radius: 8px;
+
+            padding: 10px 14px;
+
+            background: #111827;
+            color: #ffffff;
+
+            font-size: 12px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.15s;
+        }
+
+        .primary-btn:hover {
+            background: #1f2937;
+        }
+
+        .primary-btn:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+        }
+
+        #uploadStatus {
+            margin: 11px 0 0;
+
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .success {
+            color: #166534;
+        }
+
+        .error {
+            color: #b91c1c;
+        }
+
+        /* ================= CHAT CARD ================= */
+
+        .chat-card {
+            height: 100%;
+            min-height: 0;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            flex-shrink: 0;
+
+            padding: 20px 22px;
+
+            border-bottom: 1px solid #edf0f2;
+        }
+
+        /* ================= CHAT AREA ================= */
+
+        .chat-area {
+            flex: 1;
+            min-height: 0;
+
+            padding: 20px 22px;
+
+            overflow-y: auto;
+        }
+
+        .chat-area::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-area::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .chat-area::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 10px;
+        }
+
+        /* ================= EMPTY STATE ================= */
+
+        .empty-chat {
+            height: 100%;
+            min-height: 250px;
+
+            display: flex;
+            flex-direction: column;
+
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+        }
+
+        .empty-icon {
+            width: 48px;
+            height: 48px;
+
+            margin-bottom: 13px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid #dfe3e8;
+            border-radius: 9px;
+
+            background: #fafafa;
+
+            color: #4b5563;
+
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .empty-chat h4 {
+            margin: 0 0 6px;
+
+            font-size: 14px;
+            font-weight: 650;
+
+            color: #303640;
+        }
+
+        .empty-chat p {
+            max-width: 380px;
+
+            margin: 0;
+
+            color: #858c97;
+
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        /* ================= QUESTION ================= */
+
+        .question-container {
+            flex-shrink: 0;
+
+            padding: 16px 22px 20px;
+
+            border-top: 1px solid #edf0f2;
+        }
+
+        .question-area {
+            display: flex;
+            gap: 8px;
+        }
+
+        #question {
+            flex: 1;
+            min-width: 0;
+
+            height: 42px;
+
+            border: 1px solid #d7dbe1;
+            border-radius: 8px;
+
+            padding: 0 13px;
+
+            background: #ffffff;
+
+            color: #111827;
+
+            font-size: 12px;
+
+            outline: none;
+
+            transition: 0.15s;
+        }
+
+        #question:focus {
+            border-color: #6b7280;
+
+            box-shadow:
+                0 0 0 2px #f0f1f3;
+        }
+
+        .ask-btn {
+            height: 42px;
+
+            border: none;
+            border-radius: 8px;
+
+            padding: 0 20px;
+
+            background: #111827;
+            color: #ffffff;
+
+            font-size: 12px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.15s;
+        }
+
+        .ask-btn:hover {
+            background: #1f2937;
+        }
+
+        .ask-btn:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+        }
+
+        /* ================= ANSWER ================= */
+
+        .answer-box {
+            border: 1px solid #e1e4e8;
+            border-radius: 9px;
+
+            background: #fafbfc;
+
+            padding: 17px;
+        }
+
+        .answer-label {
+            margin-bottom: 10px;
+
+            color: #374151;
+
+            font-size: 11px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .answer-text {
+            color: #374151;
+
+            font-size: 12px;
+            line-height: 1.7;
+
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        /* ================= SOURCES ================= */
+
+        .sources {
+            margin-top: 16px;
+
+            padding-top: 13px;
+
+            border-top: 1px solid #e3e6ea;
+        }
+
+        .sources-title {
+            margin-bottom: 8px;
+
+            color: #6b7280;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .source-item {
+            display: inline-block;
+
+            margin: 2px 4px 2px 0;
+
+            padding: 6px 8px;
+
+            border: 1px solid #dde1e6;
+            border-radius: 6px;
+
+            background: #ffffff;
+
+            color: #59616d;
+
+            font-size: 10px;
+        }
+
+        /* ================= LOADING ================= */
+
+        .loading {
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 9px;
+
+            height: 100%;
+
+            color: #6b7280;
+
+            font-size: 11px;
+        }
+
+        .loader {
+            width: 15px;
+            height: 15px;
+
+            border: 2px solid #d1d5db;
+            border-top-color: #374151;
+
+            border-radius: 50%;
+
+            animation: spin 0.7s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            height: 40px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #9ca3af;
+
+            font-size: 10px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 850px) {
+
+            body {
+                overflow: auto;
+                height: auto;
+            }
+
+            header {
+                height: 62px;
+            }
+
+            main {
+                height: auto;
+                min-height: calc(100vh - 102px);
+
+                padding: 22px 15px;
+            }
+
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            .chat-card {
+                height: 500px;
+                min-height: 500px;
+            }
+
+            .hero h2 {
+                font-size: 24px;
+            }
+
+            .status-badge {
+                display: none;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .header-inner {
+                padding: 0 15px;
+            }
+
+            .brand h1 {
+                font-size: 14px;
+            }
+
+            .brand p {
+                display: none;
+            }
+
+            .question-area {
+                flex-direction: column;
+            }
+
+            .ask-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="header-inner">
+
+        <div class="brand">
+
+            <div class="brand-mark">
+                RP
+            </div>
+
+            <div>
+
+                <h1>
+                    Research Paper Assistant
+                </h1>
+
+                <p>
+                    Document-based research analysis
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="status-badge">
+            RAG SYSTEM
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- ================= MAIN ================= -->
+
+<main>
+
+
+    <section class="hero">
+
+        <h2>
+            Research Paper Assistant
+        </h2>
+
+        <p>
+            Upload research papers and ask questions based exclusively
+            on the content of your documents.
+        </p>
+
+    </section>
+
+
+    <div class="layout">
+
+
+        <!-- ================= UPLOAD ================= -->
+
+        <section class="card upload-card">
+
+            <div class="card-header">
+
+                <h3>
+                    Research Documents
+                </h3>
+
+                <p>
+                    Upload one or more PDF files to build
+                    your research knowledge base.
+                </p>
+
+            </div>
+
+
+            <div class="upload-zone">
+
+                <div class="upload-symbol">
+                    PDF
+                </div>
+
+                <strong>
+                    Select research papers
+                </strong>
+
+                <span>
+                    Supported format: PDF
+                </span>
+
+                <input
+                    type="file"
+                    id="files"
+                    multiple
+                    accept=".pdf"
+                >
+
+            </div>
+
+
+            <button
+                class="primary-btn"
+                id="uploadBtn"
+                onclick="uploadFiles()"
+            >
+                Upload Documents
+            </button>
+
+
+            <p id="uploadStatus"></p>
+
+        </section>
+
+
+        <!-- ================= CHAT ================= -->
+
+        <section class="card chat-card">
+
+
+            <div class="chat-header">
+
+                <div
+                    class="card-header"
+                    style="border: none; padding: 0;"
+                >
+
+                    <h3>
+                        Ask a Question
+                    </h3>
+
+                    <p>
+                        Ask questions about methodology, datasets,
+                        findings, limitations, and future work.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="chat-area"
+                id="chat"
+            >
+
+                <div class="empty-chat">
+
+                    <div class="empty-icon">
+                        Q
+                    </div>
+
+                    <h4>
+                        Ready for your question
+                    </h4>
+
+                    <p>
+                        Upload a research paper and enter a question
+                        below to begin your document analysis.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="question-container">
+
+                <div class="question-area">
+
+                    <input
+                        id="question"
+                        type="text"
+                        placeholder="e.g. What methodology is used?"
+                        onkeydown="handleEnter(event)"
+                    >
+
+                    <button
+                        class="ask-btn"
+                        id="askBtn"
+                        onclick="askQuestion()"
+                    >
+                        Ask
+                    </button>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+    </div>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    Research Paper Assistant · Retrieval-Augmented Generation
+
+</footer>
+
+
+<script>
+
+
+/* =========================
+   UPLOAD FILES
+========================= */
+
+async function uploadFiles() {
+
+    const files =
+        document.getElementById("files").files;
+
+    const status =
+        document.getElementById("uploadStatus");
+
+    const button =
+        document.getElementById("uploadBtn");
+
+
+    if (!files.length) {
+
+        status.className = "error";
+
+        status.innerText =
+            "Please select at least one PDF file.";
+
+        return;
+    }
+
+
+    const formData =
+        new FormData();
+
+
+    for (const file of files) {
+
+        formData.append(
+            "files",
+            file
+        );
+
+    }
+
+
+    button.disabled = true;
+
+    button.innerText =
+        "Processing...";
+
+    status.className = "";
+
+    status.innerText =
+        "Extracting and indexing documents...";
+
+
+    try {
+
+        const response =
+            await fetch(
+                "/upload",
+                {
+                    method: "POST",
+                    body: formData
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            response.ok &&
+            data.files &&
+            data.files.length
+        ) {
+
+            status.className =
+                "success";
+
+            status.innerText =
+                data.message;
+
+        } else {
+
+            status.className =
+                "error";
+
+            status.innerText =
+                data.errors
+                    ? data.errors.join(" ")
+                    : "Upload failed.";
+
+        }
+
+    } catch (error) {
+
+        status.className =
+            "error";
+
+        status.innerText =
+            "Unable to connect to the server.";
+
+    }
+
+
+    button.disabled = false;
+
+    button.innerText =
+        "Upload Documents";
+}
+
+
+/* =========================
+   ASK QUESTION
+========================= */
+
+async function askQuestion() {
+
+    const input =
+        document.getElementById("question");
+
+    const chat =
+        document.getElementById("chat");
+
+    const button =
+        document.getElementById("askBtn");
+
+
+    const question =
+        input.value.trim();
+
+
+    if (!question) {
+
+        input.focus();
+
+        return;
+    }
+
+
+    button.disabled = true;
+
+    button.innerText =
+        "...";
+
+
+    chat.innerHTML = `
+        <div class="loading">
+            <div class="loader"></div>
+            Searching your research documents...
+        </div>
+    `;
+
+
+    try {
+
+        const response =
+            await fetch(
+                "/chat",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        question: question
+                    })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        let sourcesHTML = "";
+
+
+        if (
+            data.sources &&
+            data.sources.length
+        ) {
+
+            sourcesHTML = `
+                <div class="sources">
+
+                    <div class="sources-title">
+                        Sources
+                    </div>
+
+                    ${data.sources.map(
+                        source => `
+                            <span class="source-item">
+                                ${escapeHTML(
+                                    source.document
+                                )}
+                                · Page ${source.page}
+                            </span>
+                        `
+                    ).join("")}
+
+                </div>
+            `;
+        }
+
+
+        chat.innerHTML = `
+            <div class="answer-box">
+
+                <div class="answer-label">
+                    Answer
+                </div>
+
+                <div class="answer-text">
+                    ${escapeHTML(data.answer)}
+                </div>
+
+                ${sourcesHTML}
+
+            </div>
+        `;
+
+
+    } catch (error) {
+
+        chat.innerHTML = `
+            <div class="answer-box">
+
+                <div class="answer-label">
+                    Error
+                </div>
+
+                <div class="answer-text">
+                    Unable to connect to the server.
+                    Please make sure the FastAPI server is running.
+                </div>
+
+            </div>
+        `;
+    }
+
+
+    button.disabled = false;
+
+    button.innerText =
+        "Ask";
+}
+
+
+/* =========================
+   ENTER KEY
+========================= */
+
+function handleEnter(event) {
+
+    if (
+        event.key === "Enter"
+    ) {
+
+        askQuestion();
+
+    }
+
+}
+
+
+/* =========================
+   HTML SECURITY
+========================= */
+
+function escapeHTML(text) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent =
+        text;
+
+    return div.innerHTML;
+}
+
+
+</script>
+
+</body>
+
+</html>
