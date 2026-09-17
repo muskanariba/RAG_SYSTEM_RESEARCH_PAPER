@@ -240,7 +240,7 @@ def chat(data: Question):
         if not docs:
 
             return {
-                "answer":
+                "answers":
                 "The answer is not available in the uploaded documents.",
                 "sources": []
             }
